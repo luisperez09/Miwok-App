@@ -31,10 +31,10 @@ public class WordAdapter extends ArrayAdapter<Word> {
     /**
      * Provides a view for an AdapterView (ListView, GridView, etc.)
      *
-     * @param position The position in the list of data that should be displayed in the
-     *                 list item view.
+     * @param position    The position in the list of data that should be displayed in the
+     *                    list item view.
      * @param convertView The recycled view to populate.
-     * @param parent The parent ViewGroup that is used for inflation.
+     * @param parent      The parent ViewGroup that is used for inflation.
      * @return The View for the position in the AdapterView.
      */
     @Override
@@ -62,10 +62,20 @@ public class WordAdapter extends ArrayAdapter<Word> {
         defaultTextView.setText(currentWord.getDefaultTranslation());
 
         // Find the ImageView in the list_item.xml layout with the ID image
-        ImageView imageView = (ImageView)listItemView.findViewById(R.id.image);
-        // Get the image resource ID from the current word object and set this resource
-        // on the ImageView
-        imageView.setImageResource(currentWord.getImageResourceId());
+        ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
+
+        // Check if image is provided for this word
+        if (currentWord.hasImage()) {
+            // Get the image resource ID from the current word object and set this resource
+            // on the ImageView
+            imageView.setImageResource(currentWord.getImageResourceId());
+
+            // Make sure the view is visible
+            imageView.setVisibility(View.VISIBLE);
+        } else {
+            // Set visibility to GONE when image is not present to avoid taking up space
+            imageView.setVisibility(View.GONE);
+        }
 
 
         // Return the whole list item layout (containing 2 TextViews)
