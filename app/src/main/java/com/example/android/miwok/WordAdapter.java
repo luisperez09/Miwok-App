@@ -6,11 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class WordAdapter extends ArrayAdapter<Word> {
+    private int color;
+
     /**
      * This is our own custom constructor (it doesn't mirror a superclass constructor).
      * The context is used to inflate the layout file, and the list is the data we want
@@ -18,22 +22,24 @@ public class WordAdapter extends ArrayAdapter<Word> {
      *
      * @param context The current context. Used to inflate the layout file.
      * @param words   A List of Words objects to display in a list
+     * @param color   Hex color value to set on item views
      */
-    public WordAdapter(Activity context, ArrayList<Word> words) {
+    public WordAdapter(Activity context, ArrayList<Word> words, int color) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
         // the second argument is used when the ArrayAdapter is populating a single TextView.
         // Because this is a custom adapter for two TextViews, the adapter is not
         // going to use this second argument, so it can be any value. Here, we used 0.
         super(context, 0, words);
+        this.color = color;
     }
 
     /**
      * Provides a view for an AdapterView (ListView, GridView, etc.)
      *
-     * @param position The position in the list of data that should be displayed in the
-     *                 list item view.
+     * @param position    The position in the list of data that should be displayed in the
+     *                    list item view.
      * @param convertView The recycled view to populate.
-     * @param parent The parent ViewGroup that is used for inflation.
+     * @param parent      The parent ViewGroup that is used for inflation.
      * @return The View for the position in the AdapterView.
      */
     @Override
@@ -60,6 +66,25 @@ public class WordAdapter extends ArrayAdapter<Word> {
         // Default TextView
         defaultTextView.setText(currentWord.getDefaultTranslation());
 
+        // Find the ImageView in the list_item.xml layout with the ID image
+        ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
+
+        // Check if image is provided for this word
+        if (currentWord.hasImage()) {
+            // Get the image resource ID from the current word object and set this resource
+            // on the ImageView
+            imageView.setImageResource(currentWord.getImageResourceId());
+
+            // Make sure the view is visible
+            imageView.setVisibility(View.VISIBLE);
+        } else {
+            // Set visibility to GONE when image is not present to avoid taking up space
+            imageView.setVisibility(View.GONE);
+        }
+        // Find view with ID text_container and set background color to the one provided
+        // in constructor
+        LinearLayout textContainer = (LinearLayout) listItemView.findViewById(R.id.text_container);
+        textContainer.setBackgroundColor(color);
 
         // Return the whole list item layout (containing 2 TextViews)
         // so that it can be shown in the ListView
