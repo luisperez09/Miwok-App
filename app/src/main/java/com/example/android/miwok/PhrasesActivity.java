@@ -4,6 +4,7 @@ import android.media.MediaPlayer;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -51,6 +52,9 @@ public class PhrasesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Get the {@link Word} object at the given position the user clicked on
                 Word word = words.get(position);
+
+                // Print current word to logs
+                Log.i("PhrasesActivity", "Current word: " + word);
 
                 // Create and setup the {@link MediaPlayer} for the audio resource associated
                 // with the current word
