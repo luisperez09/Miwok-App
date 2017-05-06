@@ -28,6 +28,11 @@
     <!-- Category name for the vocabulary words for family members [CHAR LIMIT=20] -->
     <string name="category_family">Family</string>
 
+    <string name="action_about">About this App</string>
+    <string name="about_text">This App shows and plays vocabulary of the native Miwok language.
+    \n\nIt utilizes Listviews, Custom Adapters, Fragments and MediaPlayer
+    </string>
+
     <!-- Numbers vocabulary -->
     <string name="number_one">one</string>
     <string name="number_two">two</string>

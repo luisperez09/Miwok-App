@@ -43,4 +43,6 @@
     <string name="phrase_what_is_your_name">¿Cuál es tu nombre?</string>
     <string name="phrase_where_are_you_going">¿A dónde vas?</string>
     <string name="phrase_yes_im_coming">Sí, voy.</string>
+    <string name="action_about">Acerca de esta App</string>
+    <string name="about_text">Esta App muestra y reproduce vocabulario del idioma indígena Miwok \n\nUtiliza Listviews, Custom Adapters, Fragments y MediaPlayer</string>
 </resources>
